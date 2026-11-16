@@ -26,7 +26,10 @@ const Wrapper = link ? 'a' : 'div';
 <article class={`grid gap-6 md:gap-8 ${image ? 'md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
   {
     image && (
-      <Wrapper class="ekas-poster aspect-[3/2]" {...(link ? { href: link, tabindex: '-1', 'aria-hidden': 'true' } : {})}>
+      <Wrapper
+        class="ekas-poster aspect-[3/2]"
+        {...(link ? { href: link, tabindex: '-1', 'aria-hidden': 'true' } : {})}
+      >
         <Image
           src={image}
           widths={[400, 900]}

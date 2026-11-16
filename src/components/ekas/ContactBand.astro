@@ -21,7 +21,12 @@ const { title, subtitle, image } = Astro.props;
 
     <div class="ekas-contact-card mx-auto mt-8 grid max-w-4xl overflow-hidden bg-white md:grid-cols-2">
       <ContactForm class="p-6 sm:p-10" />
-      <img src={image.src} alt={image.alt} class="hidden h-full w-full object-cover object-[center_85%] md:block" loading="lazy" />
+      <img
+        src={image.src}
+        alt={image.alt}
+        class="hidden h-full w-full object-cover object-[center_85%] md:block"
+        loading="lazy"
+      />
     </div>
   </div>
 </section>

@@ -4,7 +4,13 @@
 // Κάθε ομάδα γράφει ένα attribute στο <html> (π.χ. data-palette). Η επιλογή `base` της ομάδας είναι αυτή που
 // ισχύει χωρίς attribute (βλ. CustomStyles.astro).
 // Το `base` είναι η επιλογή που ισχύει χωρίς attribute (το :root του CustomStyles.astro).
-const groups = [
+interface LabGroup {
+  key: string;
+  title: string;
+  base: string;
+  options: { id: string; name: string; colors: string[] }[];
+}
+const groups: LabGroup[] = [
   // Όλα όσα δοκιμάστηκαν εδώ κλείδωσαν (2026-11-16): χρώματα, γραμματοσειρές, κορυφή της αρχικής, σχήμα κουμπιών,
   // τονισμένη λέξη τίτλων (απορρίφθηκε). Το πλαίσιο μένει άδειο και κρυφό ώσπου να χρειαστεί ξανά.
 ];
@@ -130,7 +136,9 @@ const config = groups.map((g) => ({ key: g.key, base: g.base, ids: g.options.map
       if (!group) return;
       try {
         localStorage.setItem(storeKey(group.key), b.dataset.labId);
-      } catch {}
+      } catch {
+        // Χωρίς αποθήκευση του browser (ιδιωτικό παράθυρο): η επιλογή ισχύει μόνο για αυτή τη σελίδα.
+      }
       apply(group, b.dataset.labId);
     });
   })();

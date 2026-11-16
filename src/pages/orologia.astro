@@ -23,15 +23,17 @@ const metadata = {
     />
     <p id="glossary-count" class="mt-3 min-h-5 text-sm text-muted mb-4"></p>
     <dl id="glossary-list" class="divide-y divide-gray-200 dark:divide-gray-700">
-      {glossary.map((t) => (
-        <div class="py-4 glossary-item" data-text={`${t.greek} ${t.english}`.toLowerCase()}>
-          <dt class="font-semibold text-lg text-heading">
-            {t.greek}
-            <span class="font-normal text-muted"> ({t.english})</span>
-          </dt>
-          <dd class="mt-1 text-gray-700 dark:text-gray-300">{t.definition}</dd>
-        </div>
-      ))}
+      {
+        glossary.map((t) => (
+          <div class="py-4 glossary-item" data-text={`${t.greek} ${t.english}`.toLowerCase()}>
+            <dt class="font-semibold text-lg text-heading">
+              {t.greek}
+              <span class="font-normal text-muted"> ({t.english})</span>
+            </dt>
+            <dd class="mt-1 text-gray-700 dark:text-gray-300">{t.definition}</dd>
+          </div>
+        ))
+      }
     </dl>
   </PageShell>
 

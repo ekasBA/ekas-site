@@ -80,7 +80,11 @@ export const footerData = {
   secondaryLinks: [{ text: 'Πολιτική απορρήτου', href: getPermalink('/aporrito') }],
   socialLinks: [
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/groups/217347537745/' },
-    { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ' },
+    {
+      ariaLabel: 'YouTube',
+      icon: 'tabler:brand-youtube',
+      href: 'https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ',
+    },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   // Το υποσέλιδο του σάιτ είναι το components/ekas/EkasFooter.astro, αυτό το κείμενο δεν εμφανίζεται πουθενά.

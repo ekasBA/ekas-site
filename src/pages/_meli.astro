@@ -3,12 +3,22 @@
 // Η αναζήτηση της αρχικής στέλνει εδώ με ?q=όνομα.
 import Layout from '~/layouts/PageLayout.astro';
 import PageShell from '~/components/ekas/PageShell.astro';
-import members from '~/data/members.json';
 import { getPermalink } from '~/utils/permalinks';
+
+// Ο κατάλογος (src/data/members.json) υπάρχει μόνο όσο η σελίδα είναι ανοιχτή (βλ. utils/members.ts). Διαβάζεται
+// έτσι ώστε η απουσία του να μη σπάει τον έλεγχο του κώδικα.
+interface Member {
+  name: string;
+  group: string;
+  cv: string | null;
+}
+const found = Object.values(import.meta.glob<{ default: Member[] }>('/src/data/members.json', { eager: true }));
+const members: Member[] = found[0]?.default ?? [];
 
 const metadata = {
   title: 'Μέλη',
-  description: 'Μέλη της Ελληνικής Κοινότητας Ανάλυσης Συμπεριφοράς που έχουν συναινέσει για την ανάρτηση του βιογραφικού τους.',
+  description:
+    'Μέλη της Ελληνικής Κοινότητας Ανάλυσης Συμπεριφοράς που έχουν συναινέσει για την ανάρτηση του βιογραφικού τους.',
 };
 
 const groups = [...new Set(members.map((m) => m.group))];
@@ -56,7 +66,9 @@ const groups = [...new Set(members.map((m) => m.group))];
     <p id="member-empty" class="mt-8 hidden text-base text-default">Δεν βρέθηκε μέλος με αυτό το όνομα.</p>
 
     <p class="mt-8 text-base text-default">
-      <a class="font-semibold text-primary underline underline-offset-4" href={getPermalink('/eggrafi')}>Εγγραφή - Μέλη</a>
+      <a class="font-semibold text-primary underline underline-offset-4" href={getPermalink('/eggrafi')}
+        >Εγγραφή - Μέλη</a
+      >
     </p>
   </PageShell>
 
@@ -68,11 +80,7 @@ const groups = [...new Set(members.map((m) => m.group))];
 
   <script>
     // Αναζήτηση χωρίς τόνους και χωρίς διάκριση πεζών και κεφαλαίων. Κάθε λέξη που γράφεται πρέπει να υπάρχει στο όνομα.
-    const strip = (s: string) =>
-      s
-        .normalize('NFD')
-        .replace(/[̀-ͯ]/g, '')
-        .toLowerCase();
+    const strip = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
     const setup = () => {
       const input = document.getElementById('member-search') as HTMLInputElement | null;
@@ -93,7 +101,9 @@ const groups = [...new Set(members.map((m) => m.group))];
           if (show) n++;
         });
         groups.forEach((g) => {
-          const any = Array.from(g.querySelectorAll<HTMLElement>('.member-item')).some((el) => el.style.display !== 'none');
+          const any = Array.from(g.querySelectorAll<HTMLElement>('.member-item')).some(
+            (el) => el.style.display !== 'none'
+          );
           g.style.display = any ? '' : 'none';
         });
         empty.classList.toggle('hidden', n > 0);

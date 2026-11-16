@@ -33,8 +33,14 @@ const { title, subtitle, image } = Astro.props;
 
       {
         hasMembersPage && (
-          <form action={getPermalink('/meli')} method="get" class="ekas-search mt-8 flex max-w-lg flex-col gap-2 sm:flex-row sm:gap-0">
-            <label class="sr-only" for="hero-q">Όνομα μέλους</label>
+          <form
+            action={getPermalink('/meli')}
+            method="get"
+            class="ekas-search mt-8 flex max-w-lg flex-col gap-2 sm:flex-row sm:gap-0"
+          >
+            <label class="sr-only" for="hero-q">
+              Όνομα μέλους
+            </label>
             <input
               id="hero-q"
               name="q"
@@ -43,7 +49,9 @@ const { title, subtitle, image } = Astro.props;
               autocomplete="off"
               class="min-w-0 flex-1 border border-gray-300 bg-white px-4 py-3.5 text-base text-heading placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
-            <button type="submit" class="btn-primary whitespace-nowrap">Αναζήτηση μέλους</button>
+            <button type="submit" class="btn-primary whitespace-nowrap">
+              Αναζήτηση μέλους
+            </button>
           </form>
         )
       }
