@@ -48,12 +48,8 @@ const [lead, ...rest] = await findLatestPosts({ count: 3 });
           ))
         }
       </ul>
-      <a
-        href={getBlogPermalink()}
-        class="mt-6 inline-block font-semibold text-primary underline underline-offset-4 hover:text-secondary"
-      >
-        Όλες οι ανακοινώσεις
-      </a>
+      {/* Κουμπί, όπως το «Διαβάστε περισσότερα» των άλλων ενοτήτων της αρχικής (χρήστης, 2026-11-17). */}
+      <a href={getBlogPermalink()} class="btn-primary mt-8"> Όλες οι ανακοινώσεις </a>
     </div>
   </div>
 </section>
