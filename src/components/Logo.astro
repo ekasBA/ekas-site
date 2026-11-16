@@ -7,10 +7,14 @@
 // Ανάμεσα στα 1024 και τα 1215 pixel το μενού δεν αφήνει χώρο για την επωνυμία (μετρημένο: από τα 1216 και πάνω
 // μένει κενό τουλάχιστον 24 pixel ως το μενού). Εκεί μένει μόνο το σήμα, και η επωνυμία κρύβεται από το μάτι
 // αλλά όχι από τους αναγνώστες οθόνης. Το μενού είναι δεξιά (position="right" στο PageLayout.astro).
+//
+// 2026-11-17: ο χρήστης ζήτησε το ΠΑΛΙΟ λογότυπο (αρχικό σχέδιο, EKAS-palio-logo.zip), βγαίνει με το
+// scripts/logo_palio.py. Το νέο σήμα μένει στο public/logo/ekas-sima-kefalida.svg: για επιστροφή αρκεί να
+// ξαναμπεί αυτό εδώ (width 50, height 56).
 ---
 
 <span class="ekas-logo">
-  <img src="/logo/ekas-sima-kefalida.svg" alt="" width="50" height="56" loading="eager" />
+  <img src="/logo/palio-sima-kefalida.png" alt="" width="42" height="56" loading="eager" />
   <span class="ekas-logo-name font-heading">Ελληνική Κοινότητα<br />Ανάλυσης Συμπεριφοράς</span>
 </span>
 

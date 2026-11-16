@@ -1,6 +1,8 @@
 ---
 // Υποσέλιδο σε τέσσερις στήλες: ποιοι είμαστε, σύνδεσμοι, όροι, «γίνετε μέλος».
 // Το λογότυπο εδώ είναι η εκδοχή με την επωνυμία σε τέσσερις γραμμές (πακέτο λογοτύπου, public/logo).
+// Από 2026-11-17 το παλιό λογότυπο (palio-logo-4-grammes.png, βλ. scripts/logo_palio.py). Το νέο μένει ως
+// ekas-logo-4-grammes-el.svg (width 213) για επιστροφή.
 import { Icon } from 'astro-icon/components';
 import { getHomePermalink, getPermalink, getBlogPermalink } from '~/utils/permalinks';
 // Η διεύθυνση email της Κοινότητας γράφεται σε ένα μόνο σημείο, το src/data/contact.json.
@@ -32,9 +34,9 @@ const social = [
     <div>
       <a class="inline-flex" href={getHomePermalink()}>
         <img
-          src="/logo/ekas-logo-4-grammes-el.svg"
+          src="/logo/palio-logo-4-grammes.png"
           alt="Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς"
-          width="213"
+          width="192"
           height="96"
           class="-ml-1 h-24 w-auto"
           loading="lazy"
