@@ -1,0 +1,41 @@
+# Δημοσίευση του σάιτ στο GitHub Pages (behavioranalysis.gr).
+# Τρέχει σε κάθε αλλαγή στο main: και όταν αποθηκεύεται ανακοίνωση από τη σελίδα διαχείρισης (Pages CMS).
+# Χτίζει το σάιτ και το ανεβάζει. Ο συνδυασμός είναι το επίσημο παράδειγμα του withastro/action.
+name: Δημοσίευση
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Αν γίνουν δύο αποθηκεύσεις η μία πίσω από την άλλη, η παλαιότερη δημοσίευση ακυρώνεται και μένει η νεότερη.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Λήψη του αποθετηρίου
+        uses: actions/checkout@v7
+      - name: Εγκατάσταση και χτίσιμο
+        uses: withastro/action@v6
+        with:
+          node-version: 22
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Δημοσίευση στο GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
