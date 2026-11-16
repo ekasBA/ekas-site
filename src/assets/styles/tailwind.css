@@ -71,8 +71,9 @@
 }
 
 /* Sticky header: solid page background, χωρίς θόλωμα και χωρίς σκιά. Τη χωρίζει από τη σελίδα η γραμμή
-   του CustomStyles.astro. */
-#header.scroll > div:first-child {
+   του CustomStyles.astro. Το φόντο ισχύει ΠΑΝΤΑ, όχι μόνο με την κλάση scroll: η κλάση μπαίνει μετά από 60px
+   κύλισης, και ως εκεί η φωτογραφία της αρχικής φαινόταν πίσω από την κεφαλίδα (παρατήρηση χρήστη, 2026-11-17). */
+#header > div:first-child {
   @apply bg-page;
 }
 .dark #header.scroll > div:first-child,
