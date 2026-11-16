@@ -1,0 +1,49 @@
+# Ρύθμιση της σελίδας διαχείρισης (Pages CMS, https://pagescms.org).
+# Η σελίδα διαχείρισης διαβάζει αυτό το αρχείο και δείχνει στον συντάκτη μια φόρμα για κάθε ανακοίνωση.
+# Ό,τι αποθηκεύει γίνεται commit σε αυτό το αποθετήριο. Πρώτη εκδοχή (2026-11-16), δοκιμάζεται στην πράξη.
+
+media:
+  input: public/images
+  output: /images
+  rename: safe
+
+content:
+  - name: anakoinoseis
+    label: Ανακοινώσεις
+    type: collection
+    path: src/data/post
+    format: yaml-frontmatter
+    filename: '{year}-{month}-{day}-{primary}.md'
+    view:
+      fields: [title, publishDate, category]
+      primary: title
+      sort: [publishDate, title]
+      default:
+        sort: publishDate
+        order: desc
+    fields:
+      - name: title
+        label: Τίτλος
+        type: string
+        required: true
+      - name: publishDate
+        label: Ημερομηνία δημοσίευσης
+        type: date
+        required: true
+        options:
+          time: true
+      - name: category
+        label: Κατηγορία
+        type: select
+        default: Ανακοινώσεις
+        options:
+          values: [Ανακοινώσεις, Άρθρα, Βίντεο]
+      - name: excerpt
+        label: Σύντομη περιγραφή (φαίνεται στη λίστα των ανακοινώσεων)
+        type: text
+      - name: image
+        label: Εικόνα ή αφίσα
+        type: image
+      - name: body
+        label: Κείμενο
+        type: rich-text
