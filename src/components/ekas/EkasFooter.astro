@@ -1,0 +1,117 @@
+---
+// Υποσέλιδο σε τέσσερις στήλες: ποιοι είμαστε, σύνδεσμοι, όροι, «γίνετε μέλος».
+// Το λογότυπο εδώ είναι η εκδοχή με την επωνυμία σε τέσσερις γραμμές (πακέτο λογοτύπου, public/logo).
+import { Icon } from 'astro-icon/components';
+import { getHomePermalink, getPermalink, getBlogPermalink } from '~/utils/permalinks';
+// Η διεύθυνση email της Κοινότητας γράφεται σε ένα μόνο σημείο, το src/data/contact.json.
+import contact from '~/data/contact.json';
+// Ο σύνδεσμος «Μέλη» εμφανίζεται μόνο όσο υπάρχει η σελίδα των μελών (βλ. utils/members.ts).
+import { hasMembersPage } from '~/utils/members';
+
+const email = contact.email;
+const quick = [
+  { text: 'Ιστορικό της Κοινότητας', href: getPermalink('/koinotita') },
+  { text: 'Ανακοινώσεις', href: getBlogPermalink() },
+  ...(hasMembersPage ? [{ text: 'Μέλη', href: getPermalink('/meli') }] : []),
+  { text: 'Ορολογία', href: getPermalink('/orologia') },
+  { text: 'Επικοινωνία', href: getPermalink('/epikoinonia') },
+];
+const terms = [
+  { text: 'Καταστατικό', href: getPermalink('/katastatiko') },
+  { text: 'Κώδικας Δεοντολογίας', href: getPermalink('/kodikas-deontologias') },
+  { text: 'Πολιτική απορρήτου', href: getPermalink('/aporrito') },
+];
+const social = [
+  { label: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/groups/217347537745/' },
+  { label: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ' },
+];
+---
+
+<footer class="ekas-footer">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:py-16">
+    <div>
+      <a class="inline-flex" href={getHomePermalink()}>
+        <img
+          src="/logo/ekas-logo-4-grammes-el.svg"
+          alt="Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς"
+          width="213"
+          height="96"
+          class="-ml-1 h-24 w-auto"
+          loading="lazy"
+        />
+      </a>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-default">
+        Η Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς δημιουργήθηκε για την ανάπτυξη και τη διάδοση της φιλοσοφίας του
+        συμπεριφορισμού και της βασικής και εφαρμοσμένης του επιστήμης στην ελληνική γλώσσα ανά τον κόσμο.
+      </p>
+      <div class="mt-4 flex gap-2">
+        {
+          social.map(({ label, icon, href }) => (
+            <a
+              href={href}
+              aria-label={label}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex p-2 text-muted hover:text-primary"
+            >
+              <Icon name={icon} class="h-5 w-5" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <h2 class="font-heading text-base font-bold text-heading">Σύνδεσμοι</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          quick.map(({ text, href }) => (
+            <li>
+              <a class="text-default hover:text-primary hover:underline" href={href}>
+                {text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-5 text-sm text-default">
+        <a class="hover:text-primary hover:underline" href={`mailto:${email}`}>{email}</a>
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-heading text-base font-bold text-heading">Όροι</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          terms.map(({ text, href }) => (
+            <li>
+              <a class="text-default hover:text-primary hover:underline" href={href}>
+                {text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-heading text-base font-bold text-heading">Εγγραφή - Μέλη</h2>
+      <p class="mt-4 text-sm leading-relaxed text-default">
+        Όλα τα μέλη δηλώνουν την δέσμευσή τους όσον αφορά στους σκοπούς της Κοινότητας.
+      </p>
+      <a href={getPermalink('/eggrafi')} class="btn-primary mt-5 text-sm">Εγγραφή</a>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-200">
+    <p class="mx-auto max-w-7xl px-4 py-5 text-center text-xs leading-relaxed text-muted sm:px-6">
+      © {new Date().getFullYear()} Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .ekas-footer {
+    border-top: 1px solid var(--ekas-soft);
+  }
+</style>

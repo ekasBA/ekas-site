@@ -1,0 +1,101 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import PostTags from '~/components/blog/Tags.astro';
+
+import { APP_BLOG } from 'astrowind:config';
+import type { Post } from '~/types';
+
+import { getPermalink } from '~/utils/permalinks';
+import { findImage } from '~/utils/images';
+import { getFormattedDate } from '~/utils/utils';
+
+export interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const image = (await findImage(post.image)) as ImageMetadata | undefined;
+
+const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
+// Το πλαίσιο της αφίσας είναι σύνδεσμος όταν η ανακοίνωση έχει δική της σελίδα.
+const Wrapper = link ? 'a' : 'div';
+---
+
+<article class={`grid gap-6 md:gap-8 ${image ? 'md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
+  {
+    image && (
+      <Wrapper class="ekas-poster aspect-[3/2]" {...(link ? { href: link, tabindex: '-1', 'aria-hidden': 'true' } : {})}>
+        <Image
+          src={image}
+          widths={[400, 900]}
+          width={900}
+          height={600}
+          sizes="(max-width: 900px) 400px, 900px"
+          alt=""
+          format="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      </Wrapper>
+    )
+  }
+  <div>
+    <header>
+      <div class="mb-1">
+        <span class="text-sm">
+          <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+          <time datetime={post.publishDate.toISOString()} class="inline-block"
+            >{getFormattedDate(post.publishDate)}</time
+          >
+          {
+            post.author && (
+              <>
+                {' '}
+                · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+                <span>{post.author.replaceAll('-', ' ')}</span>
+              </>
+            )
+          }
+          {
+            post.category && (
+              <>
+                {' '}
+                ·{' '}
+                <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
+                  {post.category.title}
+                </a>
+              </>
+            )
+          }
+        </span>
+      </div>
+      <h2 class="text-xl sm:text-2xl leading-snug mb-2 font-heading text-heading dark:text-slate-300">
+        {
+          link ? (
+            <a
+              class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
+              href={link}
+            >
+              {post.title}
+            </a>
+          ) : (
+            post.title
+          )
+        }
+      </h2>
+    </header>
+
+    {post.excerpt && <p class="text-base leading-relaxed text-default dark:text-slate-400">{post.excerpt}</p>}
+    {
+      post.tags && Array.isArray(post.tags) ? (
+        <footer class="mt-5">
+          <PostTags tags={post.tags} />
+        </footer>
+      ) : (
+        <Fragment />
+      )
+    }
+  </div>
+</article>

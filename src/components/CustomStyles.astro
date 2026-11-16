@@ -1,0 +1,185 @@
+---
+// ΟΨΗ ΤΟΥ ΣΑΪΤ: χρώματα και γράμματα. Αποφάσεις του χρήστη, 2026-11-16.
+//
+// Στόχος, με δικά του λόγια: κύρος και επιστημονικότητα. Να την εμπιστευτεί ο γονιός με παιδί στο φάσμα,
+// το Κέντρο Τεκμηρίωσης για την έκδοση περιοδικού, οι ευρωπαϊκοί φορείς, τα κανάλια.
+//
+// ΧΡΩΜΑΤΑ: δύο και τα ουδέτερα, ποτέ τρίτο.
+//   Μπορντό  #7b1e2e   ό,τι πατιέται: κουμπιά και σύνδεσμοι
+//   Σκούρο μπλε #1f3a5f   οι μεγάλες επιφάνειες και οι γραμμές: ζώνη επικοινωνίας, γραμμή κεφαλίδας
+//   Ουδέτερα: λευκό φόντο, γραφίτης με μπλε τόνο για τα γράμματα, ανοιχτοί τόνοι του ίδιου μπλε για επιφάνειες.
+//   Μοίρασμα 60, 30, 10: ουδέτερα, μπλε, μπορντό.
+//   Αν ζητηθεί η αντίστροφη διάταξη (μπλε κουμπιά, μπορντό λεπτομέρειες), αλλάζουν θέση οι τιμές
+//   των --aw-color-primary/secondary/accent με το --ekas-accent.
+//
+// ΓΡΑΜΜΑΤΑ: τίτλοι σε GFS Didot (Εταιρεία Ελληνικών Τυπογραφικών Στοιχείων, το κλασικό γράμμα των ελληνικών
+//   βιβλίων, μόνο κανονικό βάρος), κείμενο σε Commissioner σε δύο βάρη, 400 και 600.
+//   Φορτώνονται από το astro.config.ts (`fonts`) και το <Font /> του Layout.astro.
+//
+// ΧΩΡΙΣ ΤΑ ΣΗΜΑΔΙΑ ΤΗΣ ΕΤΟΙΜΗΣ ΣΕΛΙΔΑΣ (αίτημα του χρήστη, 2026-11-16, από τον οδηγό frontend-design):
+//   καμία σκιά, κανένα θόλωμα (backdrop blur), καμία διαβάθμιση για στολίδι, κανένα διακοσμητικό σχήμα,
+//   καμία κίνηση εισόδου όταν κατεβαίνει η σελίδα. Οι φωτογραφίες και οι επιφάνειες έχουν ορθές γωνίες
+//   (--ekas-radius: 0), όπως σε έντυπο. Κίνηση υπάρχει μόνο ως απάντηση σε ενέργεια του επισκέπτη
+//   (πέρασμα ποντικιού).
+//   Αποφάσεις του χρήστη μετά από δοκιμή πάνω στη σελίδα (2026-11-16):
+//   Κουμπιά και πεδία κρατούν τη στρογγυλεμένη γωνία 0.625rem (--ekas-btn-radius). Δοκίμασε τα τετράγωνα και
+//     γύρισε πίσω («ας γυρίσουμε στα προηγούμενα κουμπιά»).
+//   Η κορυφή της αρχικής μένει με το κείμενο πάνω στη φωτογραφία (ο πέπλος της είναι η μόνη διαβάθμιση).
+//   Καμία τονισμένη λέξη στους τίτλους. Δοκιμάστηκε ως υπογράμμιση σε ανοιχτό μπορντό, ανοιχτό μπλε και
+//     πορτοκαλοκίτρινο και απορρίφθηκε («άσε το highlight εντελώς»).
+//
+// ΚΕΝΑ (αίτημα του χρήστη, 2026-11-16: «πιο ομοιογενή και πιο δικαιολογημένα»). Ένας κανόνας για όλο το σάιτ,
+//   σε βήματα του μισού rem (0.25, 0.5, 1, 1.5, 2, 2.5, 4, 6):
+//   Σελίδα: πλάτος 80rem (max-w-7xl), ίδιο με την κεφαλίδα, πλάγιο περιθώριο 1rem και από 640px 1.5rem.
+//     Ό,τι ξεκινά αριστερά ξεκινά στην ίδια κατακόρυφο με το λογότυπο.
+//   Ενότητα: 4rem πάνω και κάτω, από 768px 6rem (py-16 md:py-24).
+//   Εσωτερική σελίδα (PageShell.astro): μία στήλη ανάγνωσης 46rem (--ekas-measure, γύρω στους 75 χαρακτήρες
+//     ανά γραμμή, όπως σε σελίδα βιβλίου), ο τίτλος στην αριστερή ακμή της στήλης.
+//   Τίτλος σελίδας (h1) → περιεχόμενο 2rem. Τίτλος ενότητας (h2) → περιεχόμενο 1.5rem.
+//   Κείμενο → κουμπί 2rem. Παράγραφος → παράγραφος 1rem. Στήλη → στήλη 2.5rem, από 1024px 4rem.
+//   Εσωτερικό περιθώριο πλαισίου (εγγραφή, φόρμα): 1.5rem, από 640px 2.5rem.
+//   Οι εικόνες των ανακοινώσεων είναι αφίσες με κείμενο: φαίνονται ολόκληρες, ποτέ κομμένες, μέσα σε πλαίσιο
+//     σταθερής αναλογίας (.ekas-poster).
+//
+//   --aw-color-primary     κουμπιά, σύνδεσμοι
+//   --aw-color-secondary   το primary όταν περνά το ποντίκι από πάνω
+//   --ekas-accent          η γραμμή κάτω από την κεφαλίδα
+//   --ekas-soft            λεπτά περιγράμματα, χρώμα επιλογής κειμένου
+//   --ekas-band            η έγχρωμη ζώνη της επικοινωνίας
+//   --ekas-panel           το φόντο της κάρτας της εγγραφής
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-commissioner);
+    --aw-font-serif: var(--font-gfs-didot);
+    --aw-font-heading: var(--font-gfs-didot);
+
+    --aw-color-primary: #7b1e2e;
+    --aw-color-secondary: #5f1522;
+    --aw-color-accent: #7b1e2e;
+    --ekas-accent: #1f3a5f;
+    --ekas-accent-ink: #ffffff;
+    --ekas-soft: #dbe3ec;
+    --ekas-band: #1f3a5f;
+    --ekas-band-ink: #ffffff;
+    --ekas-panel: #f1f4f7;
+    --aw-color-text-heading: #14233a;
+    --aw-color-text-default: #36414f;
+    --aw-color-text-muted: rgb(54 65 79 / 72%);
+    --aw-color-bg-page: #ffffff;
+
+    --ekas-btn-radius: 0.625rem;
+    --ekas-radius: 0;
+    --ekas-measure: 46rem;
+
+    --aw-color-bg-page-dark: rgb(8 9 10);
+  }
+
+  /* Η στήλη ανάγνωσης των εσωτερικών σελίδων. */
+  .ekas-column {
+    max-width: var(--ekas-measure);
+    margin-inline: auto;
+  }
+
+  /* Το πλαίσιο μιας αφίσας ανακοίνωσης: η εικόνα φαίνεται ολόκληρη πάνω σε απαλό φόντο. */
+  .ekas-poster {
+    display: block;
+    overflow: hidden;
+    background: var(--ekas-panel);
+  }
+  .ekas-poster img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* ΠΑΛΙΑ ΚΕΙΜΕΝΑ ΤΟΥ JOOMLA. Έχουν πίνακες με πλάτος και ύψος γραμμένα με το χέρι (π.χ. width: 1097px στις
+     Εκδόσεις) και εικόνες κολλημένες στο κείμενο. Οι κανόνες από κάτω τα φέρνουν στα μέτρα της στήλης. */
+  /* Εικόνα που «επιπλέει» μένει μέσα στο κείμενό της: ό,τι ακολουθεί ξεκινά από κάτω της. */
+  main .prose {
+    display: flow-root;
+  }
+  main .prose table {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    margin-block: 0;
+  }
+  main .prose :is(col, tr, td, th) {
+    width: auto !important;
+    height: auto !important;
+  }
+  main .prose :is(td, th) {
+    padding: 1.5rem 0 !important;
+    vertical-align: top !important;
+  }
+  main .prose :is(td, th) + :is(td, th) {
+    padding-left: 2rem !important;
+  }
+  main .prose td > :first-child {
+    margin-top: 0;
+  }
+  main .prose td > :last-child {
+    margin-bottom: 0;
+  }
+  /* Κελί που ξεκινά με εικόνα (το εξώφυλλο ενός βιβλίου): στενή σταθερή στήλη. */
+  @media (width >= 40rem) {
+    main .prose td:first-child:has(img) {
+      width: 14rem !important;
+    }
+  }
+  /* Σε κινητό οι στήλες ενός πίνακα μπαίνουν η μία κάτω από την άλλη. */
+  @media (width < 40rem) {
+    main .prose :is(table, tbody, tr, td, th) {
+      display: block;
+    }
+    main .prose colgroup {
+      display: none;
+    }
+    main .prose :is(td, th) {
+      padding: 0.75rem 0 !important;
+    }
+    main .prose :is(td, th) + :is(td, th) {
+      padding-left: 0 !important;
+    }
+  }
+  main .prose td img {
+    display: block;
+    margin: 0 0 1rem;
+  }
+  main .prose td img + br {
+    display: none;
+  }
+  /* Εικόνα που «επιπλέει» αριστερά μέσα σε κείμενο: ίδιο κενό γύρω της παντού. */
+  main .prose img[style*='float: left'] {
+    margin: 0.375rem 2rem 1rem 0;
+  }
+
+  /* Η GFS Didot έχει μόνο κανονικό βάρος: χωρίς ψεύτικα έντονα από τον browser. */
+  :root :is(h1, h2, h3, h4, .font-heading) {
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: 0;
+  }
+
+  /* ΑΥΣΤΗΡΑ ΔΥΟ ΓΡΑΜΜΑΤΟΣΕΙΡΕΣ (όρος του χρήστη, 2026-11-16: «δεν θέλουμε παραπάνω από δύο»).
+     Τίποτα στο σάιτ δεν ορίζει δική του γραμματοσειρά. Τα παλιά κείμενα του Joomla έχουν εδώ κι εκεί
+     γραμματοσειρά γραμμένη με το χέρι (style="font-family: Verdana"): ο κανόνας από κάτω την ακυρώνει.
+     Ο κώδικας (code, pre, kbd) δεν παίρνει μονοδιάστατη γραμματοσειρά: μένει στην Commissioner. */
+  main [style*='font-family'] {
+    font-family: inherit !important;
+  }
+  :root :is(code, kbd, samp, pre) {
+    font-family: var(--aw-font-sans), sans-serif;
+  }
+
+  ::selection {
+    background-color: var(--ekas-soft);
+  }
+
+  /* Η λεπτή γραμμή κάτω από την κεφαλίδα, όπως στο πρότυπο. */
+  #header {
+    border-bottom: 4px solid var(--ekas-accent);
+  }
+</style>

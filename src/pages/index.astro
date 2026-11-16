@@ -1,0 +1,90 @@
+---
+// Αρχική σελίδα. Η σειρά των ενοτήτων ακολουθεί το πρότυπο που διάλεξε η Κοινότητα:
+// κορυφή με αναζήτηση μέλους, ιστορικό, εγγραφή μελών, ανακοινώσεις, επικοινωνία, τι είναι η Ανάλυση της Συμπεριφοράς.
+//
+// ΚΕΙΜΕΝΑ: είναι τα υπάρχοντα, αυτούσια. Δεν γράφουμε νέα και δεν αναδιατυπώνουμε.
+//   κορυφή            ΝΕΑ διατύπωση, εγκεκριμένη από τον χρήστη στις 2026-11-16 (δεν του άρεσε η πρόταση του καταστατικού).
+//                     Το «εθνικό τμήμα» στηρίζεται στην παλιά αρχική («αναγνωρίστηκε ως National Chapter», Αύγουστος 2016).
+//                     Η EABA στον κατάλογό της γράφει «affiliated chapter»: ο ακριβής τίτλος θέλει επιβεβαίωση από τη Διαχειρίστρια.
+//   ιστορικό          παλιά αρχική σελίδα (σελίδα 27 του Joomla), πρώτη παράγραφος και η πρόταση για το 2016
+//   εγγραφή           παλιά σελίδα «Εγγραφή - Μέλη» (σελίδα 35)
+//   επικοινωνία       παλιά σελίδα «Επικοινωνία» (σελίδα 46)
+//   τι είναι η Α.Σ.   παλιά αρχική σελίδα, ενότητα «Τι είναι η Ανάλυση της Συμπεριφοράς»
+// Το πλήρες κείμενο της παλιάς αρχικής βρίσκεται στη σελίδα /koinotita.
+import Layout from '~/layouts/PageLayout.astro';
+
+import HeroSearch from '~/components/ekas/HeroSearch.astro';
+import AboutSplit from '~/components/ekas/AboutSplit.astro';
+import JoinBanner from '~/components/ekas/JoinBanner.astro';
+import NewsStrip from '~/components/ekas/NewsStrip.astro';
+import ContactBand from '~/components/ekas/ContactBand.astro';
+import SplitFeature from '~/components/ekas/SplitFeature.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroSearch
+    title="Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς"
+    subtitle="Επιστημονική μη κερδοσκοπική εταιρεία, εθνικό τμήμα της European Association for Behaviour Analysis."
+    image={{ src: '/foto/synedrio-afises.jpg', alt: 'Συνεδρία αναρτημένων εργασιών σε συνέδριο της Κοινότητας' }}
+  />
+
+  <AboutSplit
+    title="Ιστορικό της Κοινότητας"
+    imageSmall={{ src: '/foto/eaba-afisa-ekas.jpg', alt: 'Η αφίσα της Κοινότητας σε συνέδριο της EABA' }}
+    imageLarge={{ src: '/foto/synedrio-omada.jpg', alt: 'Μέλη της Κοινότητας σε συνέδριο' }}
+    action={{ text: 'Διαβάστε περισσότερα', href: getPermalink('/koinotita') }}
+  >
+    <p>
+      Η Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς δημιουργήθηκε για την ανάπτυξη και τη διάδοση της φιλοσοφίας του
+      συμπεριφορισμού και της βασικής και εφαρμοσμένης του επιστήμης στην ελληνική γλώσσα ανά τον κόσμο. Η σύλληψη της
+      ιδέας προέκυψε κατά τη διάρκεια του 5ου συνεδρίου του European Association for Behaviour Analysis στο Πανεπιστήμιο
+      Κρήτης στο Ρέθυμνο σε συνεργασία με το Τμήμα Ψυχολογίας του Παντείου το 2010.
+    </p>
+    <p>
+      Τον Αύγουστο του 2016, η ΕΚΑΣ αναγνωρίστηκε ως National Chapter της European Association for Behaviour Analysis.
+    </p>
+  </AboutSplit>
+
+  <JoinBanner
+    title="Εγγραφή μελών"
+    image={{ src: '/foto/koinotita-giorti.jpg', alt: 'Μέλη και φίλοι της Κοινότητας' }}
+    action={{ text: 'Εγγραφή', href: getPermalink('/eggrafi') }}
+  >
+    <p>
+      Όλα τα μέλη δηλώνουν την δέσμευσή τους όσον αφορά στους σκοπούς της Κοινότητας όπως αναλυτικά αναγράφονται στο{' '}
+      <a class="font-semibold text-primary underline underline-offset-4" href={getPermalink('/katastatiko')}
+        >παρόν καταστατικό</a
+      >.
+    </p>
+    <p>Υπάρχουν τέσσερις κατηγορίες μελών: τακτικά μέλη, μέλη-φίλοι, μέλη-εκπαιδευόμενοι και επίτιμα μέλη.</p>
+  </JoinBanner>
+
+  <NewsStrip title="Ανακοινώσεις" />
+
+  <ContactBand
+    title="Επικοινωνία"
+    image={{ src: '/foto/ergastirio-omada.jpg', alt: 'Μέλη του Εργαστηρίου και της Κοινότητας' }}
+  />
+
+  <SplitFeature
+    title="Τι είναι η Ανάλυση της Συμπεριφοράς"
+    image={{ src: '/foto/kedivim-mathima.jpg', alt: 'Μάθημα Ανάλυσης Συμπεριφοράς σε αμφιθέατρο' }}
+  >
+    <p>
+      Η Ανάλυση της Συμπεριφοράς είναι η επιστήμη η οποία βασίζεται στη φιλοσοφία της επιστήμης που ονομάζεται
+      θεμελιώδης συμπεριφορισμός και παρέχει την πραγματικά πλέον ωφέλιμη βάση για την πειραματική ανάλυση και την
+      επιστημονική ερμηνεία ολόκληρου του φάσματος των ψυχολογικών φαινομένων, από την αντίληψη στη γνώση, έως και την
+      ίδια τη δημιουργική επιστημονική σκέψη.
+    </p>
+    <p>
+      Ο θεμελιωτής του σύγχρονου συμπεριφορισμού είναι ο Burrhus Frederic Skinner.{' '}
+      <a href={getPermalink('/koinotita')}>Διαβάστε περισσότερα</a>
+    </p>
+  </SplitFeature>
+</Layout>

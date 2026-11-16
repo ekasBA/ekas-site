@@ -1,0 +1,137 @@
+---
+// Δοκιμαστήριο όψης: μικρό πλαίσιο κάτω αριστερά για να αλλάζουμε παλέτα και γράμματα πάνω στην πραγματική σελίδα.
+// Μπαίνει μόνο στο τοπικό περιβάλλον (βλ. Layout.astro), ποτέ στο σάιτ που ανεβαίνει.
+// Κάθε ομάδα γράφει ένα attribute στο <html> (π.χ. data-palette). Η επιλογή `base` της ομάδας είναι αυτή που
+// ισχύει χωρίς attribute (βλ. CustomStyles.astro).
+// Το `base` είναι η επιλογή που ισχύει χωρίς attribute (το :root του CustomStyles.astro).
+const groups = [
+  // Όλα όσα δοκιμάστηκαν εδώ κλείδωσαν (2026-11-16): χρώματα, γραμματοσειρές, κορυφή της αρχικής, σχήμα κουμπιών,
+  // τονισμένη λέξη τίτλων (απορρίφθηκε). Το πλαίσιο μένει άδειο και κρυφό ώσπου να χρειαστεί ξανά.
+];
+const config = groups.map((g) => ({ key: g.key, base: g.base, ids: g.options.map((o) => o.id) }));
+---
+
+{/* Χωρίς transition:persist: αλλιώς ένα παλιό, κρυφό πλαίσιο μένει στη σελίδα όταν αλλάζουν οι επιλογές. */}
+<aside id="ekas-lab" aria-label="Δοκιμαστήριο όψης" hidden={groups.length === 0}>
+  {
+    groups.map(({ key, title, options }) => (
+      <>
+        <p class="ekas-lab-title">{title}</p>
+        <div class="ekas-lab-row">
+          {options.map(({ id, name, colors }) => (
+            <button type="button" data-lab-key={key} data-lab-id={id} aria-pressed="false">
+              {colors && (
+                <span class="ekas-lab-swatch" aria-hidden="true">
+                  {colors.map((c) => (
+                    <i style={`background:${c}`} />
+                  ))}
+                </span>
+              )}
+              {name}
+            </button>
+          ))}
+        </div>
+      </>
+    ))
+  }
+</aside>
+
+<style is:global>
+  #ekas-lab {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 60;
+    padding: 0.6rem 0.75rem 0.7rem;
+    border-radius: 0.9rem;
+    background: rgb(255 255 255 / 96%);
+    box-shadow:
+      0 0 0 1px rgb(15 23 42 / 10%),
+      0 0.75rem 2rem -0.5rem rgb(15 23 42 / 35%);
+    letter-spacing: 0;
+    color: #1f2937;
+  }
+  #ekas-lab .ekas-lab-title {
+    margin: 0 0 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6b7280;
+  }
+  #ekas-lab .ekas-lab-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-width: min(36rem, calc(100vw - 3.5rem));
+  }
+  #ekas-lab .ekas-lab-row + .ekas-lab-title {
+    margin-top: 0.65rem;
+  }
+  #ekas-lab button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    background: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #ekas-lab button[aria-pressed='true'] {
+    border-color: #111827;
+    box-shadow: inset 0 0 0 1px #111827;
+  }
+  #ekas-lab .ekas-lab-swatch {
+    display: inline-flex;
+    overflow: hidden;
+    margin-left: -0.25rem;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
+  }
+  #ekas-lab .ekas-lab-swatch i {
+    display: block;
+    width: 0.8rem;
+    height: 1.15rem;
+  }
+</style>
+
+<script is:inline define:vars={{ config }}>
+  (() => {
+    const storeKey = (key) => 'ekas-' + key;
+    // Μια επιλογή που αποθηκεύτηκε παλιότερα και δεν υπάρχει πια γυρίζει στη βάση.
+    const read = ({ key, ids, base }) => {
+      try {
+        const v = localStorage.getItem(storeKey(key));
+        return ids.includes(v) ? v : base;
+      } catch {
+        return base;
+      }
+    };
+    const apply = (group, id) => {
+      if (id === group.base) delete document.documentElement.dataset[group.key];
+      else document.documentElement.dataset[group.key] = id;
+      document.querySelectorAll(`#ekas-lab button[data-lab-key="${group.key}"]`).forEach((b) => {
+        b.setAttribute('aria-pressed', String(b.dataset.labId === id));
+      });
+    };
+    const applyAll = () => config.forEach((g) => apply(g, read(g)));
+
+    applyAll();
+    // Το script ξανατρέχει σε κάθε πλοήγηση: οι ακροατές μπαίνουν μόνο την πρώτη φορά.
+    if (window.__ekasLab) return;
+    window.__ekasLab = true;
+    // Η πλοήγηση χωρίς ανανέωση (view transitions) ξαναγράφει τα attributes του <html>.
+    document.addEventListener('astro:after-swap', applyAll);
+    document.addEventListener('click', (e) => {
+      const b = e.target instanceof Element ? e.target.closest('#ekas-lab button[data-lab-key]') : null;
+      if (!b) return;
+      const group = config.find((g) => g.key === b.dataset.labKey);
+      if (!group) return;
+      try {
+        localStorage.setItem(storeKey(group.key), b.dataset.labId);
+      } catch {}
+      apply(group, b.dataset.labId);
+    });
+  })();
+</script>

@@ -1,0 +1,34 @@
+---
+// Η ενότητα της εγγραφής: κείμενο αριστερά πάνω σε απαλό φόντο, φωτογραφία δεξιά με καθαρή ακμή.
+// Η φωτογραφία δεν σβήνει μέσα στο φόντο: τα δύο μισά χωρίζουν με ευθεία γραμμή.
+export interface Props {
+  title: string;
+  image: { src: string; alt: string };
+  action: { text: string; href: string };
+}
+
+const { title, image, action } = Astro.props;
+---
+
+<section class="mx-auto max-w-7xl px-4 sm:px-6 pb-16 md:pb-24">
+  <div class="ekas-join grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+    <div class="p-6 sm:p-10">
+      <h2 class="font-heading text-3xl md:text-4xl leading-[1.25] text-heading">{title}</h2>
+      <a href={action.href} class="btn-primary mt-6">{action.text}</a>
+      <div class="mt-8 max-w-xl space-y-4 text-base leading-relaxed text-default">
+        <slot />
+      </div>
+    </div>
+    <div class="relative hidden md:block">
+      <img src={image.src} alt={image.alt} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ekas-join {
+    overflow: hidden;
+    background: var(--ekas-panel);
+    border-radius: var(--ekas-radius);
+  }
+</style>

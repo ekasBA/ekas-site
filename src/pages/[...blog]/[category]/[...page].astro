@@ -1,0 +1,48 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
+
+import Layout from '~/layouts/PageLayout.astro';
+import BlogList from '~/components/blog/List.astro';
+import PageShell from '~/components/ekas/PageShell.astro';
+import Pagination from '~/components/blog/Pagination.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
+
+export const prerender = true;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return await getStaticPathsBlogCategory({ paginate });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths> & { category: Record<string, string> };
+
+const { page, category } = Astro.props as Props;
+
+const currentPage = page.currentPage ?? 1;
+
+const breadcrumbs = [
+  { text: 'Αρχική', href: getPermalink('/') },
+  { text: 'Ανακοινώσεις', href: getBlogPermalink() },
+  ...(currentPage > 1
+    ? [{ text: category.title, href: getPermalink(category.slug, 'category') }, { text: `Σελίδα ${currentPage}` }]
+    : [{ text: category.title }]),
+];
+
+const metadata = {
+  title: `${category.title}${currentPage > 1 ? `, σελίδα ${currentPage}` : ''}`,
+  description: `Ανακοινώσεις στην κατηγορία ${category.title}.`,
+  robots: {
+    index: blogCategoryRobots?.index,
+    follow: blogCategoryRobots?.follow,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <PageShell title={category.title}>
+    <Breadcrumbs slot="above" class="mb-6" items={breadcrumbs} />
+    <BlogList posts={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </PageShell>
+</Layout>

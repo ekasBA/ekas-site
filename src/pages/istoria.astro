@@ -1,0 +1,99 @@
+---
+// Χρονολόγιο της Κοινότητας, με ΜΟΝΟ υπάρχοντα κείμενα (απόφαση του χρήστη, 2026-11-16).
+// Κάθε σταθμός είναι μια παλιά ανακοίνωση: δείχνει τη δική της ημερομηνία και τον δικό της τίτλο και οδηγεί σε αυτήν.
+// Δεν υπάρχει εδώ κείμενο γραμμένο για τη σελίδα. Το μόνο που διαλέγεται με το χέρι είναι ΠΟΙΕΣ ανακοινώσεις
+// μετρούν ως σταθμοί (ο πίνακας `stationIds`: συνέδρια, ίδρυση και διοίκηση, προγράμματα, διακρίσεις, εκδόσεις).
+// Αν μια ανακοίνωση του πίνακα δεν βρεθεί (π.χ. άλλαξε όνομα σε νέα εισαγωγή), το build σταματά με μήνυμα.
+import Layout from '~/layouts/PageLayout.astro';
+import PageShell from '~/components/ekas/PageShell.astro';
+import { fetchPosts } from '~/utils/blog';
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+
+const metadata = {
+  title: 'Η ιστορία μας',
+  description: 'Χρονολόγιο της Ελληνικής Κοινότητας Ανάλυσης Συμπεριφοράς από το 2010, μέσα από τις ανακοινώσεις της.',
+};
+
+const stationIds = [
+  'synedria-eaba-icbs',
+  'apo-koinotita-se-etaireia',
+  'organotiki-idrytiki-synedriasi-tis-ellinikis-koinotitas-analysis-symperiforas',
+  '1o-synedrio-ellinikis-koinotitas-analysis-symperiforas',
+  '7o-synedrio-tis-eyropaikis-etaireias-analysis-symperiforas',
+  '2o-synedrio-ellinikis-koinotitas-analysis-symperiforas',
+  '8o-synedrio-tis-e-a-v-a',
+  'b-f-skinner-foundation-student-research-award',
+  'neo-dioikitiko-symvoylio',
+  '3o-panellinio-synedrio-ellinikis-koinotitas-analysis-symperiforas-9-10-dekemvrio',
+  'anakoinosi-4oy-synedrioy-ellinikis-koinotitas-analysis-symperiforas',
+  'dia-vioy-mathisi-sto-panteio-programma-analysis-symperiforas',
+  'enarxi-toy-programmatos-erasmus',
+  'diakrisi-gia-to-ergastirio-peiramatikis-ki-efarmosmenis-analysis-symperiforas',
+  'protovoylia-ethelontikis-stirixis',
+  'prosklisi-se-webinar-b-f-skinner-foundation',
+  'eyropaiko-programma-erasmus-chrisimopoiontas-tin-analysi-symperiforas-gia-na-apo',
+  'i-analysi-symperiforas-sta-dimotika-scholeia',
+  'vivlio-pos-na-ginete-kakoi-goneis-me-kales-protheseis',
+  'triimeri-ekdilosi-stin-efarmosmeni-analysi-symperiforas-24-26-06-2022',
+  'to-ergastirio-sto-10o-synedrio-eaba-tampere-finland',
+  '5o-synedrio-ellinikis-koinotitas-analysis-symperiforas-16-17-dekemvrioy-2023',
+  'neo-tmima-kedivim-analysi-symperiforas-fevroyarios-2025',
+];
+
+// Ο μόνος σταθμός χωρίς δική του ανακοίνωση: η πρόταση είναι αυτούσια από την παλιά αρχική σελίδα
+// (τώρα «Ιστορικό της Κοινότητας», /koinotita), και οδηγεί εκεί.
+const fromOldHomepage = [
+  {
+    date: new Date('2016-08-01'),
+    label: 'Αύγουστος 2016',
+    title: 'Τον Αύγουστο του 2016, η ΕΚΑΣ αναγνωρίστηκε ως National Chapter της European Association for Behaviour Analysis.',
+    href: getPermalink('/koinotita'),
+  },
+];
+
+const posts = await fetchPosts();
+const stations = [
+  ...stationIds.map((id) => {
+    const post = posts.find((p) => p.id === id || p.slug === id);
+    if (!post) throw new Error(`istoria.astro: δεν βρέθηκε η ανακοίνωση «${id}»`);
+    return {
+      date: post.publishDate,
+      label: getFormattedDate(post.publishDate),
+      title: post.title,
+      href: getPermalink(post.permalink, 'post'),
+    };
+  }),
+  ...fromOldHomepage,
+].sort((a, b) => a.date.getTime() - b.date.getTime());
+
+const years = [...new Set(stations.map((s) => s.date.getFullYear()))];
+---
+
+<Layout metadata={metadata}>
+  <PageShell title="Η ιστορία μας">
+    <div class="border-b border-gray-200">
+      {
+        years.map((year) => (
+          <section class="grid gap-x-8 border-t border-gray-200 py-6 sm:grid-cols-[6rem_minmax(0,1fr)] sm:items-center">
+            <h2 class="font-heading text-3xl leading-none text-heading">{year}</h2>
+            <ul class="mt-4 space-y-6 sm:mt-0">
+              {stations
+                .filter((s) => s.date.getFullYear() === year)
+                .map((s) => (
+                  <li>
+                    <a href={s.href} class="group block">
+                      <span class="block text-sm text-muted">{s.label}</span>
+                      <span class="mt-1 block font-heading text-xl leading-snug text-heading group-hover:text-primary">
+                        {s.title}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </PageShell>
+</Layout>

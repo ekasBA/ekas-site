@@ -1,0 +1,33 @@
+---
+// Μία ανακοίνωση σε μία γραμμή: μικρή αφίσα, ημερομηνία, τίτλος και, αν ζητηθεί, η αρχή του κειμένου.
+// Τη χρησιμοποιούν η αρχική (NewsStrip.astro) και οι σχετικές ανακοινώσεις (blog/RelatedPosts.astro).
+import type { Post } from '~/types';
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+
+export interface Props {
+  post: Post;
+  excerpt?: boolean;
+}
+
+const { post, excerpt = true } = Astro.props;
+---
+
+<a href={getPermalink(post.permalink, 'post')} class="group flex gap-6 py-6">
+  {
+    typeof post.image === 'string' && (
+      <span class="ekas-poster h-24 w-32 flex-none">
+        <img src={post.image} alt="" loading="lazy" />
+      </span>
+    )
+  }
+  <div class="min-w-0">
+    <time class="block text-sm text-muted" datetime={String(post.publishDate)}>
+      {getFormattedDate(post.publishDate)}
+    </time>
+    <h3 class="mt-1 font-heading text-xl leading-snug text-heading group-hover:text-primary">
+      {post.title}
+    </h3>
+    {excerpt && post.excerpt && <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-default">{post.excerpt}</p>}
+  </div>
+</a>

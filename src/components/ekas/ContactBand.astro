@@ -1,0 +1,41 @@
+---
+// Έγχρωμη ζώνη με τίτλο, και από κάτω λευκή κάρτα που πατά πάνω της: η φόρμα μηνυμάτων αριστερά, φωτογραφία δεξιά.
+// Η φόρμα είναι το ContactForm.astro, το ίδιο που έχει και η σελίδα «Επικοινωνία».
+import ContactForm from '~/components/ekas/ContactForm.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  image: { src: string; alt: string };
+}
+
+const { title, subtitle, image } = Astro.props;
+---
+
+<section class="ekas-contact relative isolate pb-16 md:pb-24">
+  <div class="ekas-contact-band absolute inset-x-0 top-0 -z-10 h-[20rem]"></div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 pt-16">
+    <h2 class="ekas-contact-ink text-center font-heading text-3xl md:text-4xl">{title}</h2>
+    {subtitle && <p class="ekas-contact-ink mx-auto mt-4 max-w-2xl text-center text-base opacity-90">{subtitle}</p>}
+
+    <div class="ekas-contact-card mx-auto mt-8 grid max-w-4xl overflow-hidden bg-white md:grid-cols-2">
+      <ContactForm class="p-6 sm:p-10" />
+      <img src={image.src} alt={image.alt} class="hidden h-full w-full object-cover object-[center_85%] md:block" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ekas-contact-band {
+    background: var(--ekas-band);
+  }
+  .ekas-contact-ink {
+    color: var(--ekas-band-ink);
+  }
+  .ekas-contact-card {
+    /* Χωρίς σκιά: την κάρτα την ορίζει ένα λεπτό περίγραμμα. */
+    border: 1px solid var(--ekas-soft);
+    border-radius: var(--ekas-radius);
+  }
+</style>

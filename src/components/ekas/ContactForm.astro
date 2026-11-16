@@ -1,0 +1,141 @@
+---
+// Η φόρμα μηνυμάτων (αρχική και σελίδα «Επικοινωνία»). Το σάιτ είναι στατικό, δεν έχει δικό του server:
+// το μήνυμα το παραλαμβάνει μια υπηρεσία φορμών και το προωθεί με email στην Κοινότητα.
+//
+// Υπηρεσία: Web3Forms (επιλογή του χρήστη, 2026-11-16, δωρεάν ως περίπου 250 μηνύματα τον μήνα).
+//
+// Ρύθμιση: src/data/contact.json
+//   endpoint  η διεύθυνση της υπηρεσίας που δέχεται το μήνυμα.
+//   extra     ό,τι θέλει επιπλέον η υπηρεσία μέσα στο μήνυμα. Για το Web3Forms: το access_key (ο κωδικός που
+//             στέλνει η υπηρεσία στο email της Κοινότητας, δημόσιος εκ κατασκευής) και το subject (το θέμα
+//             του email που φτάνει στην Κοινότητα).
+//   email     η διεύθυνση που προτείνεται όταν η αποστολή δεν γίνει.
+// Όσο το endpoint ή κάποια τιμή του extra είναι κενή (π.χ. δεν έχει μπει ακόμη το access_key), η φόρμα δεν
+// στέλνει και δείχνει τη διεύθυνση email της Κοινότητας.
+// Η φόρμα στέλνει JSON με name, email, message και ό,τι έχει το extra, και θεωρεί ότι πέτυχε όταν η υπηρεσία
+// απαντήσει με επιτυχία (HTTP 2xx). Για αλλαγή υπηρεσίας (π.χ. Formspree) αλλάζει μόνο το contact.json.
+//
+// Το κρυφό πεδίο botcheck είναι παγίδα για αυτόματα προγράμματα: άνθρωπος δεν το βλέπει. Αν έρθει συμπληρωμένο,
+// το μήνυμα δεν στέλνεται.
+// Τα μηνύματα κατάστασης (στάλθηκε, δεν στάλθηκε) είναι νέα κείμενα: στο παλιό σάιτ δεν υπήρχε φόρμα.
+//
+// Η πρόταση κάτω από το κουμπί είναι η ενημέρωση για τα προσωπικά δεδομένα, με απλά λόγια, και οδηγεί στη σελίδα
+// «Πολιτική απορρήτου» (src/pages/aporrito.md). Απόφαση του χρήστη (2026-11-16): στη φόρμα μία απλή γραμμή («ένα
+// απλό message είναι που δεν θα δημοσιοποιηθεί») και στη σελίδα όσα χρειάζονται, όσο πιο λακωνικά γίνεται: ποιος
+// λαμβάνει το μήνυμα, γιατί, μέσω ποιων υπηρεσιών, πόσο κρατιέται, ποια δικαιώματα υπάρχουν. Ένα μακρύτερο
+// κείμενο κάτω από το κουμπί δοκιμάστηκε και απορρίφθηκε ως μπερδεμένο.
+import contact from '~/data/contact.json';
+import { getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const field =
+  'mt-1.5 block w-full border border-gray-300 bg-white px-3.5 py-2.5 text-base font-normal text-heading focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30';
+---
+
+<form
+  class:list={['ekas-form', className]}
+  data-ekas-contact
+  data-endpoint={contact.endpoint}
+  data-extra={JSON.stringify(contact.extra)}
+  data-email={contact.email}
+>
+  <label class="block text-sm font-semibold text-heading">
+    Όνομα
+    <input class={field} type="text" name="name" autocomplete="name" required />
+  </label>
+  <label class="mt-4 block text-sm font-semibold text-heading">
+    Email
+    <input class={field} type="email" name="email" autocomplete="email" required />
+  </label>
+  <label class="mt-4 block text-sm font-semibold text-heading">
+    Μήνυμα
+    <textarea class={field} name="message" rows="5" required></textarea>
+  </label>
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <button type="submit" class="btn-primary mt-6">Αποστολή</button>
+  <p class="mt-4 text-sm leading-relaxed text-default" role="status" data-ekas-contact-status hidden></p>
+  <p class="mt-6 text-sm leading-relaxed text-muted">
+    Το μήνυμά σας δεν δημοσιεύεται. Το διαβάζει μόνο η Κοινότητα και το χρησιμοποιεί μόνο για να σας απαντήσει.{' '}
+    <a class="underline" href={getPermalink('/aporrito')}>Πολιτική απορρήτου</a>
+  </p>
+</form>
+
+<style>
+  .ekas-form :global(input),
+  .ekas-form :global(textarea) {
+    border-radius: var(--ekas-btn-radius);
+  }
+</style>
+
+<script>
+  const TEXT = {
+    off: 'Η φόρμα δεν έχει τεθεί ακόμη σε λειτουργία. Διεύθυνση επικοινωνίας: ',
+    sending: 'Γίνεται αποστολή.',
+    ok: 'Το μήνυμά σας στάλθηκε.',
+    fail: 'Το μήνυμα δεν στάλθηκε. Δοκιμάστε ξανά ή γράψτε στο ',
+  };
+
+  // Γράφει το μήνυμα κατάστασης κάτω από το κουμπί. Με `withEmail` προσθέτει στο τέλος τη διεύθυνση ως σύνδεσμο.
+  const show = (form: HTMLFormElement, text: string, withEmail = false) => {
+    const status = form.querySelector<HTMLElement>('[data-ekas-contact-status]');
+    if (!status) return;
+    status.textContent = text;
+    if (withEmail && form.dataset.email) {
+      const link = document.createElement('a');
+      link.href = `mailto:${form.dataset.email}`;
+      link.textContent = form.dataset.email;
+      link.className = 'font-semibold text-primary underline';
+      status.append(link);
+    }
+    status.hidden = false;
+  };
+
+  const send = async (form: HTMLFormElement) => {
+    const data = new FormData(form);
+    if (data.get('botcheck')) return;
+    const endpoint = form.dataset.endpoint;
+    const extra: Record<string, unknown> = JSON.parse(form.dataset.extra || '{}');
+    // Δεν έχει ρυθμιστεί ακόμη η υπηρεσία: λείπει η διεύθυνσή της ή κάποια τιμή που θέλει (π.χ. ο κωδικός της).
+    if (!endpoint || Object.values(extra).some((value) => value === '')) return show(form, TEXT.off, true);
+
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) button.disabled = true;
+    show(form, TEXT.sending);
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...extra,
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
+        }),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      form.reset();
+      show(form, TEXT.ok);
+    } catch {
+      show(form, TEXT.fail, true);
+    } finally {
+      if (button) button.disabled = false;
+    }
+  };
+
+  const wire = () => {
+    document.querySelectorAll<HTMLFormElement>('form[data-ekas-contact]').forEach((form) => {
+      if (form.dataset.wired) return;
+      form.dataset.wired = '1';
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        void send(form);
+      });
+    });
+  };
+  wire();
+  document.addEventListener('astro:page-load', wire);
+</script>

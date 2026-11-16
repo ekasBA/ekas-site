@@ -1,0 +1,54 @@
+---
+// Το λογότυπο της κεφαλίδας (απόφαση του χρήστη, 2026-11-16): το σήμα με τη χοντρή γραμμή από το πακέτο
+// λογοτύπου της ΕΚΑΣ, και δίπλα η επωνυμία ως κανονικό κείμενο σε GFS Didot, τη γραμματοσειρά του ίδιου του
+// λογοτύπου. Ως εικόνα, στην εκδοχή κεφαλίδας του πακέτου, η επωνυμία έβγαινε με γράμματα γύρω στα 10 pixel.
+// Το σήμα (public/logo/ekas-sima-kefalida.svg) βγαίνει από το αρχείο του πακέτου με το scripts/logo_sima.py.
+// Χρώμα μαύρο, όπως το πακέτο: δεν έχει οριστεί ακόμη χρώμα φορέα.
+// Ανάμεσα στα 1024 και τα 1215 pixel το μενού δεν αφήνει χώρο για την επωνυμία (μετρημένο: από τα 1216 και πάνω
+// μένει κενό τουλάχιστον 24 pixel ως το μενού). Εκεί μένει μόνο το σήμα, και η επωνυμία κρύβεται από το μάτι
+// αλλά όχι από τους αναγνώστες οθόνης. Το μενού είναι δεξιά (position="right" στο PageLayout.astro).
+---
+
+<span class="ekas-logo">
+  <img src="/logo/ekas-sima-kefalida.svg" alt="" width="50" height="56" loading="eager" />
+  <span class="ekas-logo-name font-heading">Ελληνική Κοινότητα<br />Ανάλυσης Συμπεριφοράς</span>
+</span>
+
+<style>
+  .ekas-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .ekas-logo img {
+    flex: none;
+    width: auto;
+    height: 3.5rem;
+    max-width: none;
+  }
+  .ekas-logo-name {
+    color: #000;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  @media (width >= 22.5rem) {
+    .ekas-logo-name {
+      font-size: 1.0625rem;
+    }
+  }
+  @media (width >= 40rem) {
+    .ekas-logo-name {
+      font-size: 1.1875rem;
+    }
+  }
+  @media (width >= 64rem) and (width < 76rem) {
+    .ekas-logo-name {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  }
+</style>

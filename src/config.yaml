@@ -1,0 +1,65 @@
+site:
+  name: ΕΚΑΣ
+  site: 'https://behavioranalysis.gr'
+  base: '/'
+  trailingSlash: false
+
+metadata:
+  title:
+    default: Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς
+    template: '%s | ΕΚΑΣ'
+  description: 'Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς. Ενίσχυση της ανάπτυξης της Ανάλυσης Συμπεριφοράς στον ελληνικό χώρο και διεθνές πλαίσιο μελέτης και συζήτησης στην ελληνική γλώσσα.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+
+i18n:
+  language: el
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 10
+
+    post:
+      isEnabled: true
+      permalink: '/anakoinoseis/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'anakoinoseis'
+      robots:
+        index: true
+
+    category:
+      isEnabled: true
+      pathname: 'katigoria'
+      robots:
+        index: true
+
+    tag:
+      isEnabled: false
+      pathname: 'etiketa'
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: true
+    relatedPostsCount: 4
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null
+
+ui:
+  theme: 'light:only'

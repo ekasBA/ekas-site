@@ -1,0 +1,8 @@
+{
+  "email": "info@behavioranalysis.gr",
+  "endpoint": "https://api.web3forms.com/submit",
+  "extra": {
+    "access_key": "e08bd031-0b61-4964-8a6b-2cf9932cbe9c",
+    "subject": "Μήνυμα από το σάιτ της ΕΚΑΣ"
+  }
+}

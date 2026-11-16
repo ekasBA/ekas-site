@@ -1,0 +1,11 @@
+---
+// Ο σύνδεσμος επιστροφής στο τέλος μιας ανακοίνωσης. Μπαίνει μέσα στη στήλη της ανακοίνωσης (θέση `below`
+// του SinglePost.astro), όχι σε δικό του πλαίσιο.
+import { getBlogPermalink } from '~/utils/permalinks';
+---
+
+<p class="mt-8">
+  <a class="font-semibold text-primary underline underline-offset-4 hover:text-secondary" href={getBlogPermalink()}>
+    Όλες οι ανακοινώσεις
+  </a>
+</p>

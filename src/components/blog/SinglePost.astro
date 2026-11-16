@@ -1,0 +1,100 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import Image from '~/components/common/Image.astro';
+import PostTags from '~/components/blog/Tags.astro';
+import SocialShare from '~/components/common/SocialShare.astro';
+
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+
+import type { Post } from '~/types';
+
+export interface Props {
+  post: Post;
+  url: string | URL;
+}
+
+const { post, url } = Astro.props;
+---
+
+<section class="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24">
+  <article class="ekas-column">
+    <header>
+      <slot name="above" />
+      <div class="mb-2 text-sm text-muted">
+        <p>
+          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+          <time datetime={post.publishDate.toISOString()} class="inline-block"
+            >{getFormattedDate(post.publishDate)}</time
+          >
+          {
+            post.updateDate && post.updateDate.getTime() !== post.publishDate.getTime() && (
+              <>
+                {' '}
+                ·{' '}
+                <span class="inline-block">
+                  Updated <time datetime={post.updateDate.toISOString()}>{getFormattedDate(post.updateDate)}</time>
+                </span>
+              </>
+            )
+          }
+          {
+            post.author && (
+              <>
+                {' '}
+                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+                <span class="inline-block">{post.author}</span>
+              </>
+            )
+          }
+          {
+            post.category && (
+              <>
+                {' '}
+                ·{' '}
+                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
+                  {post.category.title}
+                </a>
+              </>
+            )
+          }
+        </p>
+      </div>
+
+      <h1 class="font-heading text-4xl md:text-5xl leading-[1.12] text-heading">
+        {post.title}
+      </h1>
+      {post.excerpt && <p class="mt-4 text-lg md:text-xl leading-relaxed text-muted text-pretty">{post.excerpt}</p>}
+
+      {
+        post.image ? (
+          <Image
+            src={post.image}
+            class="mt-8 w-full"
+            widths={[400, 900]}
+            sizes="(max-width: 900px) 400px, 900px"
+            alt={post.imageAlt || ''}
+            width={900}
+            height={506}
+            format="webp"
+            loading="eager"
+            decoding="async"
+          />
+        ) : (
+          <div class="mt-8 border-t border-gray-200 dark:border-slate-700" />
+        )
+      }
+    </header>
+    <div
+      class="prose prose-lg max-w-none dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-a:text-primary dark:prose-a:text-blue-400 mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
+    >
+      <slot />
+    </div>
+    <div class="mt-8 flex justify-between flex-col sm:flex-row">
+      <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+      <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
+    </div>
+    <slot name="below" />
+  </article>
+</section>

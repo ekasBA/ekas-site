@@ -1,0 +1,41 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import PageShell from '~/components/ekas/PageShell.astro';
+
+import type { MetaData } from '~/types';
+
+export interface Props {
+  frontmatter: {
+    title?: string;
+    // Με `style: document` η σελίδα διαβάζεται σαν έγγραφο: κείμενο 16px αντί για 18px, και επικεφαλίδες με τη
+    // γραμματοσειρά του κειμένου, έντονα, στο ίδιο μέγεθος με το κείμενο, αντί για τη γραμματοσειρά των τίτλων.
+    // Για έγγραφα με πολλές μικρές επικεφαλίδες, όπως τα άρθρα του καταστατικού (απόφαση χρήστη, 2026-11-16).
+    // Ο τίτλος της σελίδας μένει πάντα στη γραμματοσειρά των τίτλων.
+    style?: 'document';
+  };
+}
+
+const { frontmatter } = Astro.props;
+const look =
+  frontmatter?.style === 'document'
+    ? // font-semibold με ! γιατί ο γενικός κανόνας των επικεφαλίδων (CustomStyles) τις κρατά σε κανονικό βάρος.
+      'prose-base prose-headings:font-sans prose-headings:font-semibold! prose-h2:text-base prose-h2:mt-10 prose-h2:mb-3'
+    : 'prose-lg prose-headings:font-heading';
+
+const metadata: MetaData = {
+  title: frontmatter?.title,
+};
+---
+
+<Layout metadata={metadata}>
+  <PageShell title={frontmatter.title ?? ''}>
+    <div
+      class:list={[
+        'prose max-w-none dark:prose-invert dark:prose-headings:text-slate-300 prose-a:text-primary dark:prose-a:text-blue-400',
+        look,
+      ]}
+    >
+      <slot />
+    </div>
+  </PageShell>
+</Layout>

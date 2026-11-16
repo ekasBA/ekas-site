@@ -1,0 +1,86 @@
+---
+// Κορυφή της αρχικής: φωτογραφία σε όλο το πλάτος, τίτλος αριστερά και αναζήτηση μέλους.
+// Η αναζήτηση μέλους στέλνει στη σελίδα των μελών, γι' αυτό εμφανίζεται μόνο όσο η σελίδα υπάρχει
+// (βλ. utils/members.ts). Χωρίς αυτήν η κορυφή έχει μόνο τίτλο και υπότιτλο.
+import { getPermalink } from '~/utils/permalinks';
+import { hasMembersPage } from '~/utils/members';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  image: { src: string; alt: string };
+}
+
+const { title, subtitle, image } = Astro.props;
+---
+
+<section class="ekas-hero relative isolate overflow-hidden">
+  <img
+    src={image.src}
+    alt={image.alt}
+    class="ekas-hero-img absolute inset-0 -z-20 h-full w-full object-cover object-[72%_35%]"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="ekas-hero-veil absolute inset-0 -z-10"></div>
+
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 py-20 md:py-32 lg:py-40">
+    <div class="ekas-hero-text max-w-xl">
+      <h1 class="font-heading text-4xl md:text-5xl leading-[1.12] text-heading">
+        {title}
+      </h1>
+      {subtitle && <p class="mt-6 max-w-lg text-lg leading-relaxed text-default">{subtitle}</p>}
+
+      {
+        hasMembersPage && (
+          <form action={getPermalink('/meli')} method="get" class="ekas-search mt-8 flex max-w-lg flex-col gap-2 sm:flex-row sm:gap-0">
+            <label class="sr-only" for="hero-q">Όνομα μέλους</label>
+            <input
+              id="hero-q"
+              name="q"
+              type="search"
+              placeholder="Όνομα μέλους"
+              autocomplete="off"
+              class="min-w-0 flex-1 border border-gray-300 bg-white px-4 py-3.5 text-base text-heading placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+            />
+            <button type="submit" class="btn-primary whitespace-nowrap">Αναζήτηση μέλους</button>
+          </form>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Ο «πέπλος» που κρατά το κείμενο ευανάγνωστο πάνω στη φωτογραφία. Είναι η μόνη διαβάθμιση του σάιτ
+     και μένει με απόφαση του χρήστη (2026-11-16): η άλλη εκδοχή, κείμενο αριστερά και φωτογραφία δεξιά,
+     δοκιμάστηκε και απορρίφθηκε. */
+  .ekas-hero-veil {
+    background: color-mix(in srgb, var(--aw-color-bg-page) 86%, transparent);
+  }
+  @media (width >= 64rem) {
+    .ekas-hero-veil {
+      background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--aw-color-bg-page) 96%, transparent) 0%,
+        color-mix(in srgb, var(--aw-color-bg-page) 90%, transparent) 34%,
+        color-mix(in srgb, var(--aw-color-bg-page) 35%, transparent) 58%,
+        transparent 78%
+      );
+    }
+  }
+
+  /* Το πεδίο και το κουμπί κολλάνε μεταξύ τους σε μεγάλη οθόνη. */
+  .ekas-search input {
+    border-radius: var(--ekas-btn-radius);
+  }
+  @media (width >= 40rem) {
+    .ekas-search input {
+      border-right: 0;
+      border-radius: var(--ekas-btn-radius) 0 0 var(--ekas-btn-radius);
+    }
+    .ekas-search button {
+      border-radius: 0 var(--ekas-btn-radius) var(--ekas-btn-radius) 0;
+    }
+  }
+</style>

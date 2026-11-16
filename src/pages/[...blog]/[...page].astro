@@ -1,0 +1,58 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import BlogList from '~/components/blog/List.astro';
+import PageShell from '~/components/ekas/PageShell.astro';
+import Pagination from '~/components/blog/Pagination.astro';
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
+// import PostTags from "~/components/blog/Tags.astro";
+
+import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+
+export const prerender = true;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return await getStaticPathsBlogList({ paginate });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+const currentPage = page.currentPage ?? 1;
+
+const breadcrumbs = [
+  { text: 'Αρχική', href: getPermalink('/') },
+  ...(currentPage > 1
+    ? [{ text: 'Ανακοινώσεις', href: getBlogPermalink() }, { text: `Σελίδα ${currentPage}` }]
+    : [{ text: 'Ανακοινώσεις' }]),
+];
+
+// const allCategories = await findCategories();
+// const allTags = await findTags();
+
+const metadata = {
+  title: `Ανακοινώσεις${currentPage > 1 ? `, σελίδα ${currentPage}` : ''}`,
+  description: 'Νέα της Κοινότητας, συνέδρια, εκπαιδευτικά προγράμματα και εκδηλώσεις.',
+  robots: {
+    index: blogListRobots?.index && currentPage === 1,
+    follow: blogListRobots?.follow,
+  },
+  openGraph: {
+    type: 'blog',
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    {page.url.prev && <link rel="prev" href={page.url.prev} />}
+    {page.url.next && <link rel="next" href={page.url.next} />}
+  </Fragment>
+  <PageShell title="Ανακοινώσεις" subtitle="Νέα της Κοινότητας, συνέδρια, εκπαιδευτικά προγράμματα και εκδηλώσεις.">
+    <Breadcrumbs slot="above" class="mb-6" items={breadcrumbs} />
+    <BlogList posts={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </PageShell>
+</Layout>

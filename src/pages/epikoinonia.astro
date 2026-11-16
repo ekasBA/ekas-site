@@ -1,0 +1,26 @@
+---
+// Σελίδα επικοινωνίας: η φόρμα μηνυμάτων και η διεύθυνση email. Δεν βγαίνει πια από το παλιό σάιτ.
+// Η παλιά σελίδα έλεγε ότι η Κοινότητα στεγάζεται στο Εργαστήριο του Παντείου και είχε χάρτη με τη διεύθυνση.
+// Ο χρήστης (2026-11-16): «δεν είναι πλέον η διεύθυνση στο Πάντειο». Γι' αυτό εδώ δεν υπάρχει διεύθυνση.
+import Layout from '~/layouts/PageLayout.astro';
+import PageShell from '~/components/ekas/PageShell.astro';
+import ContactForm from '~/components/ekas/ContactForm.astro';
+import contact from '~/data/contact.json';
+
+const metadata = {
+  title: 'Επικοινωνία',
+  description: 'Επικοινωνία με την Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς.',
+};
+---
+
+<Layout metadata={metadata}>
+  <PageShell title="Επικοινωνία">
+    <ContactForm />
+    <p class="mt-8 border-t border-gray-200 pt-6 text-base text-default">
+      Email:{' '}
+      <a class="font-semibold text-primary underline underline-offset-4 hover:text-secondary" href={`mailto:${contact.email}`}>
+        {contact.email}
+      </a>
+    </p>
+  </PageShell>
+</Layout>

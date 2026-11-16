@@ -1,0 +1,11 @@
+---
+// Τα εικονίδια της καρτέλας, από το πακέτο λογοτύπου της ΕΚΑΣ (2026-11-16, φάκελος 5-favicon):
+// το περίγραμμα του σήματος με χοντρή γραμμή, χωρίς φύλλα, φτερό και γράμματα.
+import favIcon from '~/assets/favicons/favicon.ico';
+import favIconSvg from '~/assets/favicons/favicon.svg';
+import appleTouchIcon from '~/assets/favicons/apple-touch-icon.png';
+---
+
+<link rel="icon" href={favIcon} sizes="any" />
+<link rel="icon" type="image/svg+xml" href={favIconSvg.src} />
+<link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon.src} />
