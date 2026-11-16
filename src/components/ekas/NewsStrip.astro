@@ -1,51 +1,59 @@
 ---
-// Η πιο πρόσφατη ανακοίνωση, μόνη της (απόφαση χρήστη, 2026-11-17: «βάλε μόνο την τελευταία ανακοίνωση»).
-// Αριστερά η αφίσα, δεξιά ημερομηνία, τίτλος, σύντομη περιγραφή και το κουμπί «Όλες οι ανακοινώσεις».
-// Αλλάζει μόνη της σε κάθε χτίσιμο: όταν μπαίνει νέα ανακοίνωση από τη σελίδα διαχείρισης, παίρνει αυτή τη θέση.
+// Τα τρία πιο πρόσφατα νέα: το πιο πρόσφατο μεγάλο αριστερά, τα δύο προηγούμενα μικρά δεξιά.
+// Δεν είναι τρεις ίδιες κάρτες στη σειρά: το μέγεθος δείχνει ποιο είναι το νεότερο.
 // Οι εικόνες είναι αφίσες με κείμενο: φαίνονται ολόκληρες μέσα σε πλαίσιο (.ekas-poster του CustomStyles.astro).
 import { findLatestPosts } from '~/utils/blog';
 import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
+import PostRow from '~/components/ekas/PostRow.astro';
 
 export interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-const [lead] = await findLatestPosts({ count: 1 });
-const leadHref = lead ? getPermalink(lead.permalink, 'post') : '';
+const [lead, ...rest] = await findLatestPosts({ count: 3 });
 ---
 
 <section class="mx-auto max-w-7xl px-4 sm:px-6 pb-16 md:pb-24">
   <h2 class="font-heading text-3xl md:text-4xl text-heading">{title}</h2>
 
-  {
-    lead && (
-      <div class="mt-6 grid items-center gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
-        {typeof lead.image === 'string' && (
-          <a href={leadHref} class="ekas-poster block aspect-[16/9]" tabindex="-1" aria-hidden="true">
-            <img src={lead.image} alt="" loading="lazy" />
-          </a>
-        )}
-        <div>
-          <time class="block text-sm text-muted" datetime={String(lead.publishDate)}>
+  <div class="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
+    {
+      lead && (
+        <a href={getPermalink(lead.permalink, 'post')} class="group block">
+          {typeof lead.image === 'string' && (
+            <div class="ekas-poster aspect-[16/9]">
+              <img src={lead.image} alt="" loading="lazy" />
+            </div>
+          )}
+          <time class="mt-4 block text-sm text-muted" datetime={String(lead.publishDate)}>
             {getFormattedDate(lead.publishDate)}
           </time>
-          <h3 class="mt-1 font-heading text-2xl md:text-3xl leading-snug text-heading">
-            <a href={leadHref} class="hover:text-primary">
-              {lead.title}
-            </a>
+          <h3 class="mt-1 font-heading text-2xl md:text-3xl leading-snug text-heading group-hover:text-primary">
+            {lead.title}
           </h3>
-          {lead.excerpt && <p class="mt-4 text-base leading-relaxed text-default">{lead.excerpt}</p>}
-          {/* Σύνδεσμος, όχι κουμπί (χρήστης, 2026-11-17: «και όλες οι ανακοινώσεις με λινκ»). */}
-          <a
-            href={getBlogPermalink()}
-            class="mt-6 inline-block font-semibold text-primary underline underline-offset-4 hover:text-secondary"
-          >
-            Όλες οι ανακοινώσεις
-          </a>
-        </div>
-      </div>
-    )
-  }
+          {lead.excerpt && <p class="mt-2 line-clamp-3 text-base leading-relaxed text-default">{lead.excerpt}</p>}
+        </a>
+      )
+    }
+
+    <div>
+      <ul class="divide-y divide-gray-200 border-y border-gray-200">
+        {
+          rest.map((post) => (
+            <li>
+              <PostRow post={post} />
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={getBlogPermalink()}
+        class="mt-6 inline-block font-semibold text-primary underline underline-offset-4 hover:text-secondary"
+      >
+        Όλες οι ανακοινώσεις
+      </a>
+    </div>
+  </div>
 </section>

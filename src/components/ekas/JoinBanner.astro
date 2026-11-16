@@ -14,11 +14,10 @@ const { title, image, action } = Astro.props;
   <div class="ekas-join grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
     <div class="p-6 sm:p-10">
       <h2 class="font-heading text-3xl md:text-4xl leading-[1.25] text-heading">{title}</h2>
-      <div class="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-default">
+      <a href={action.href} class="btn-primary mt-6">{action.text}</a>
+      <div class="mt-8 max-w-xl space-y-4 text-base leading-relaxed text-default">
         <slot />
       </div>
-      {/* Το κουμπί κάτω από το κείμενο, όπως στις άλλες ενότητες (χρήστης, 2026-11-17: «εγγραφή από κάτω»). */}
-      <a href={action.href} class="btn-primary mt-8">{action.text}</a>
     </div>
     <div class="relative hidden md:block">
       <img src={image.src} alt={image.alt} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
