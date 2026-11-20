@@ -11,8 +11,8 @@ image: "/images/img/Afissa_1o_Sinedrio_EKAS.jpg"
 Το συνέδριο θα πραγματοποιηθεί στο Πάντειο Πανεπιστήμιο Κοινωνικών και Πολιτικών Επιστημών, το Σαββατοκύριακο 30 Νοεμβρίου – 1 Δεκεμβρίου 2013.  
 Επί του παρόντος, προσκαλούμε τη συμμετοχή σας στο ιστορικό αυτό συνέδριο με την παρουσίαση μιας θεωρητικής ή ερευνητικής εργασίας στην ανάλυση συμπεριφοράς  (είτε με τη μορφή προφορικής, είτε αναρτημένης παρουσίασης), με μία συμπεριφοριστική ανάλυση κλινικής περίπτωσης ή με την ενεργό παρακολούθηση και συζήτηση των εργασιών του συνεδρίου.
 
-<a href="images/pdfs/Anakoinosi_1ou__synedriou.pdf" target="_blank">Ανακοίνωση 1ου Συνεδρίου</a>  
-<a href="images/pdfs/Aitisi_Ypovolis_Ergasias.pdf" target="_blank">Αίτηση Υποβολής Εργασίας</a>  
-<a href="images/pdfs/Aitisi_Symmetoxis.pdf" target="_blank">Αίτηση Συμμετοχής</a>
+<a href="/images/pdfs/Anakoinosi_1ou__synedriou.pdf" target="_blank">Ανακοίνωση 1ου Συνεδρίου</a>  
+<a href="/images/pdfs/Aitisi_Ypovolis_Ergasias.pdf" target="_blank">Αίτηση Υποβολής Εργασίας</a>  
+<a href="/images/pdfs/Aitisi_Symmetoxis.pdf" target="_blank">Αίτηση Συμμετοχής</a>
 
 <img src="/images/img/Afissa_1o_Sinedrio_EKAS.jpg" style="vertical-align: bottom; float: left;" width="503" height="665" alt="Afissa 1o Sinedrio EKAS" />

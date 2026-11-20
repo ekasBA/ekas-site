@@ -17,9 +17,9 @@ category: Ανακοινώσεις
 Τέλος, η Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς ανακοινώνει ότι το 2ο Συνέδριό της θα γίνει στον Οκτώβριο του 2015 στο Πάντειο Πανεπιστήμιο (οι λεπτομέρειες θα ανακοινωθούν εν καιρώ).  
   
 
-**<a href="images/pdfs/Egkainia_Ergastiriou.pdf" target="_blank">ΠΡΟΣΚΛΗΣΗ ΕΓΚΑΙΝΙΩΝ ΕΡΓΑΣΤΗΡΙΟΥ</a>**
+**<a href="/images/pdfs/Egkainia_Ergastiriou.pdf" target="_blank">ΠΡΟΣΚΛΗΣΗ ΕΓΚΑΙΝΙΩΝ ΕΡΓΑΣΤΗΡΙΟΥ</a>**
 
-**<a href="images/pdfs/EABA_SUMMER_SCHOOL_2015_CRETE.pdf" target="_blank">EABA SUMMER SCHOOL 2015</a>**
+**<a href="/images/pdfs/EABA_SUMMER_SCHOOL_2015_CRETE.pdf" target="_blank">EABA SUMMER SCHOOL 2015</a>**
 
 
 Με εκτίμηση,

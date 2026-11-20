@@ -6,11 +6,11 @@ category: Ανακοινώσεις
 image: "/images/ekas3rdconf/EKAS_3rdConf_Poster_EL.png"
 ---
 
-[<img src="/images/ekas3rdconf/EKAS_3rdConf_Poster_EL.png" style="float: left;" width="185" height="253" alt="EKAS 3rdConf Poster EL" />](/images/pdfs/AFISA.pdf) **<a href="images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ">ΑΝΑΚΟΙΝΩΣΗ ΤΟΥ ΣΥΝΕΔΡΙΟΥ</a>**
+[<img src="/images/ekas3rdconf/EKAS_3rdConf_Poster_EL.png" style="float: left;" width="185" height="253" alt="EKAS 3rdConf Poster EL" />](/images/pdfs/AFISA.pdf) **<a href="/images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ">ΑΝΑΚΟΙΝΩΣΗ ΤΟΥ ΣΥΝΕΔΡΙΟΥ</a>**
 
-<a href="images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******<a href="images/pdfs/___2017.pdf" target="_blank" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ">ΠΡΟΓΡΑΜΜΑ ΕΡΓΑΣΙΩΝ</a>******
+<a href="/images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******<a href="/images/pdfs/___2017.pdf" target="_blank" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ">ΠΡΟΓΡΑΜΜΑ ΕΡΓΑΣΙΩΝ</a>******
 
-<a href="images/aithsh_symmetoxhs17.doc" style="background-color: #ffff00;"></a><a href="images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******<a href="images/aithsh_symmetoxhs17.doc" style="background-color: #ffff00;">ΑΙΤΗΣΗ ΣΥΜΜΕΤΟΧΗΣ</a>****<a href="images/pdfs/___2017.pdf" target="_blank" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******
+<a href="/images/aithsh_symmetoxhs17.doc" style="background-color: #ffff00;"></a><a href="/images/ekas3rdconf/EKAS_3rdConf_Second_Announ.pdf" target="_blank" style="background-color: #ffff00;" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******<a href="/images/aithsh_symmetoxhs17.doc" style="background-color: #ffff00;">ΑΙΤΗΣΗ ΣΥΜΜΕΤΟΧΗΣ</a>****<a href="/images/pdfs/___2017.pdf" target="_blank" title="3ο ΣΥΝΕΔΡΙΟ ΕΚΑΣ - 2η ΑΝΑΚΟΙΝΩΣΗ"></a>******
 
         Με χαρά ανακοινώνουμε τη διεξαγωγή του 3ου Συνεδρίου της ΕΛΛΗΝΙΚΗΣ ΚΟΙΝΟΤΗΤΑΣ ΑΝΑΛΥΣΗΣ ΣΥΜΠΕΡΙΦΟΡΑΣ.  
  Το Συνέδριο θα πραγματοποιηθεί στο Πάντειο Πανεπιστήμιο Κοινωνικών και Πολιτικών Επιστημών, το Σαββατοκύριακο 9 και 10 Δεκεμβρίου 2017, υπό την αιγίδα του Τμήματος Ψυχολογίας του Παντείου.
@@ -23,4 +23,4 @@ image: "/images/ekas3rdconf/EKAS_3rdConf_Poster_EL.png"
 
 Αφίσα του Συνεδρίου:  
 
-<a href="images/ekas3rdconf/EKAS_3rdConf_Poster_EN.pdf" target="_blank" title="EKAS 3rd Conference Pοster">Αγγλικά</a> - <a href="images/pdfs/AFISA.pdf" target="_blank" title="ΠΟΣΤΕΡ 3ου ΣΥΝΕΔΡΙΟΥ ΕΚΑΣ">Ελληνικά</a>
+<a href="/images/ekas3rdconf/EKAS_3rdConf_Poster_EN.pdf" target="_blank" title="EKAS 3rd Conference Pοster">Αγγλικά</a> - <a href="/images/pdfs/AFISA.pdf" target="_blank" title="ΠΟΣΤΕΡ 3ου ΣΥΝΕΔΡΙΟΥ ΕΚΑΣ">Ελληνικά</a>

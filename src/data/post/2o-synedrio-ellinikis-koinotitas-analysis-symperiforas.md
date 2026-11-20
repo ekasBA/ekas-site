@@ -12,6 +12,6 @@ category: Ανακοινώσεις
 
 Σας προσκαλούμε να συμμετάσχετε στο Συνέδριο με την παρουσίαση μιας θεωρητικής ή ερευνητικής εργασίας στην ανάλυση συμπεριφοράς (είτε προφορικής, είτε αναρτημένης), ή μιας συμπεριφοριστικής ανάλυσης κλινικής περίπτωσης ή με την ενεργό παρακολούθηση και συζήτηση των εργασιών του Συνεδρίου.
 
-**<a href="images/pdfs/Anakoinosi_2o_synedrio_EKAS.pdf" target="_blank">Ανακοίνωση 2ου Συνεδρίου ΕΚΑΣ</a>**  
-**<a href="images/pdfs/Aitisi_Ypovolis_Ergasias_2o_synedrio_EKAS.pdf" target="_blank">Αίτηση Υποβολής Εργασίας</a>**  
-**<a href="images/pdfs/Aitisi_symmetoxis_2o_synedrio_EKAS.pdf" target="_blank">Αίτηση Συμμετοχής</a>**
+**<a href="/images/pdfs/Anakoinosi_2o_synedrio_EKAS.pdf" target="_blank">Ανακοίνωση 2ου Συνεδρίου ΕΚΑΣ</a>**  
+**<a href="/images/pdfs/Aitisi_Ypovolis_Ergasias_2o_synedrio_EKAS.pdf" target="_blank">Αίτηση Υποβολής Εργασίας</a>**  
+**<a href="/images/pdfs/Aitisi_symmetoxis_2o_synedrio_EKAS.pdf" target="_blank">Αίτηση Συμμετοχής</a>**
