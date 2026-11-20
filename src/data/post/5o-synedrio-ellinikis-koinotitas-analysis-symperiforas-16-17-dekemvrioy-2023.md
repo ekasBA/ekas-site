@@ -130,9 +130,9 @@ Youtube κανάλι της Ελληνικής Κοινότητας Ανάλυσ
 
 1\. την πρόσκληση στο συνέδριο
 
-[2. την φόρμα υποβολής εργασίας](/images/5ο_Συνέδριο_Υποβολή_Εργασίας.docx) - [πατήστε εδώ ](/images/5ο_Συνέδριο_Υποβολή_Εργασίας.docx)
+[2. την φόρμα υποβολής εργασίας](/files/5ο_Συνέδριο_Υποβολή_Εργασίας.docx) - [πατήστε εδώ ](/files/5ο_Συνέδριο_Υποβολή_Εργασίας.docx)
 
-[3. τη φόρμα υποβολής συμμετοχής](/images/5ο_Συνέδριο_Φόρμα_Συμμετοχής.docx) - [πατήστε εδώ](/images/5ο_Συνέδριο_Φόρμα_Συμμετοχής.docx)
+[3. τη φόρμα υποβολής συμμετοχής](/files/5ο_Συνέδριο_Φόρμα_Συμμετοχής.docx) - [πατήστε εδώ](/files/5ο_Συνέδριο_Φόρμα_Συμμετοχής.docx)
 
 **ΑΛΛΕΣ ΠΛΗΡΟΦΟΡΙΕΣ:** <a href="http://www.behaviorism.panteion.gr/" target="_blank" style="color: #1155cc;" data-saferedirecturl="https://www.google.com/url?q=http://www.behaviorism.panteion.gr&amp;source=gmail&amp;ust=1694036332104000&amp;usg=AOvVaw06VTUBwtpgLbgTYRSODlEo">www.behaviorism.panteion.gr</a>
 

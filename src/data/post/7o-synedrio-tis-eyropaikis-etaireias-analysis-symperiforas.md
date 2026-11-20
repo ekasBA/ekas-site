@@ -33,4 +33,4 @@ category: Ανακοινώσεις
 
 President of the European Association for Behaviour Analysis
 
- [EABA Stockholm 2014 - Call for Papers](/images/pdfs/EABA_Stockholm_2014_Call_for_Papers.pdf)
+ [EABA Stockholm 2014 - Call for Papers](/files/pdfs/EABA_Stockholm_2014_Call_for_Papers.pdf)

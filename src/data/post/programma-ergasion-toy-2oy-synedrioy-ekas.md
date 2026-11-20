@@ -5,7 +5,7 @@ excerpt: "Πρόγραμμα Εργασιών ΕΝΗΜΕΡΩΣΗ: Μπορείτ
 category: Ανακοινώσεις
 ---
 
-**<a href="/images/pdfs/Programme_2o_synedrio_EKAS.pdf" target="_blank">Πρόγραμμα Εργασιών</a>**
+**<a href="/files/pdfs/Programme_2o_synedrio_EKAS.pdf" target="_blank">Πρόγραμμα Εργασιών</a>**
 
 **ΕΝΗΜΕΡΩΣΗ:**  
 Μπορείτε να δείτε τα βίντεο από τις παρουσιάσεις του συνεδρίου στο **<a href="https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ" target="_blank" title="Ελληνική Κοινότητα Ανάλυσης Συμπεριφοράς στο YouTube">κανάλι της Ελληνικής Κοινότητας Ανάλυσης Συμπεριφοράς στο YouTube</a>**

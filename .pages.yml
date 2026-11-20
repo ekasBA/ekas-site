@@ -2,10 +2,21 @@
 # Η σελίδα διαχείρισης διαβάζει αυτό το αρχείο και δείχνει στον συντάκτη μια φόρμα για κάθε ανακοίνωση.
 # Ό,τι αποθηκεύει γίνεται commit σε αυτό το αποθετήριο. Πρώτη εκδοχή (2026-11-16), δοκιμάζεται στην πράξη.
 
+# Δύο φάκελοι: «Εικόνες» για φωτογραφίες και αφίσες, «Αρχεία» για PDF, Word και άλλα έγγραφα (από 2026-11-20).
+# Ο πρώτος είναι η προεπιλογή: από αυτόν διαλέγουν το πεδίο «Εικόνα ή αφίσα» και το «/» → Image του κειμένου.
 media:
-  input: public/images
-  output: /images
-  rename: safe
+  - name: images
+    label: Εικόνες
+    input: public/images
+    output: /images
+    categories: [image]
+    rename: safe
+  - name: files
+    label: Αρχεία
+    input: public/files
+    output: /files
+    extensions: [pdf, doc, docx, xls, xlsx, ppt, pptx, odt, ods, odp, rtf, txt, zip]
+    rename: safe
 
 content:
   - name: anakoinoseis
@@ -47,6 +58,8 @@ content:
       - name: image
         label: Εικόνα ή αφίσα
         type: image
+        options:
+          media: images
       - name: body
         label: Κείμενο
         type: rich-text

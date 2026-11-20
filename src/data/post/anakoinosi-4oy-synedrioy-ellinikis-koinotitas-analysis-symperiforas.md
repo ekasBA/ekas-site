@@ -70,5 +70,5 @@ https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ
 ΕΠΙΚΟΙΝΩΝΙΑ: <behavioranalysispanteion@gmail.com>
 
 
-- [Φόρμα υποβολής εργασίας](/images/4οσυνεδριο_υποβολη_εργασιας.docx)
-- [Φόρμα συμμετοχής](/images/4οσυνεδριο_φορμα_συμμετοχης.docx)
+- [Φόρμα υποβολής εργασίας](/files/4οσυνεδριο_υποβολη_εργασιας.docx)
+- [Φόρμα συμμετοχής](/files/4οσυνεδριο_φορμα_συμμετοχης.docx)

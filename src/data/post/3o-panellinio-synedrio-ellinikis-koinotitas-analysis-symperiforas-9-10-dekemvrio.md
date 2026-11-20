@@ -38,7 +38,7 @@ image: "/images/3oSynSlide.png"
 
 Παραδείγματα αναλύσεων κλινικών περιπτώσεων από το 1ο Συνέδριο της Κοινότητας,  μπορείτε να δείτε στο <a href="https://www.youtube.com/channel/UCUPii7aS3HQD7lyS6ncHUvQ" target="_blank">YouTube κανάλι της Ελληνικής Κοινότητας Ανάλυσης Συμπεριφοράς</a>.
 
-[Κατεβάστε την 1η ανακοίνωση](/images/pdfs/320171.pdf)  
+[Κατεβάστε την 1η ανακοίνωση](/files/pdfs/320171.pdf)  
   
 ΑΛΛΕΣ ΠΛΗΡΟΦΟΡΙΕΣ: [www.behaviorism.panteion.gr](http://www.behaviorism.panteion.gr)  
 ΕΠΙΚΟΙΝΩΝΙΑ:  behavioranalysispanteion at gmail.com

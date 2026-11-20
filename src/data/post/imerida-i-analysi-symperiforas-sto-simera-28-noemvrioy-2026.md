@@ -17,7 +17,7 @@ Meet the speakers!
 Σάββατο 28 Νοεμβρίου, Πάντειο Πανεπιστήμιο Κοινωνικών και Πολιτικών Επιστημών  
 Αίθουσα: Σάκη Καράγιωργα II
 
-[Πρόγραμμα της ημερίδας (PDF)](/images/imerida-2026/programma-imeridas.pdf)
+[Πρόγραμμα της ημερίδας (PDF)](/files/imerida-2026/programma-imeridas.pdf)
 
 Σας περιμένουμε.
 

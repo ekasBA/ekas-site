@@ -14,5 +14,5 @@ category: Ανακοινώσεις
 
 Καλή έναρξη ακαδημαϊκού έτους!  
   
-**<a href="/images/pdfs/Programme_ELPSE_2014.pdf" target="_blank">Πρόγραμμα Συνεδρίου ΕΛΨΕ 2014</a>**  
-**<a href="/images/pdfs/Presidential_address_EABA_2014.pdf" target="_blank">Ομιλία Προέδρου EABA - Στοκχόλμη 2014</a>**
+**<a href="/files/pdfs/Programme_ELPSE_2014.pdf" target="_blank">Πρόγραμμα Συνεδρίου ΕΛΨΕ 2014</a>**  
+**<a href="/files/pdfs/Presidential_address_EABA_2014.pdf" target="_blank">Ομιλία Προέδρου EABA - Στοκχόλμη 2014</a>**
